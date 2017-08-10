@@ -11,31 +11,22 @@ import Foundation
 struct File {
     
     var filename = ""
-    var status = ""
-    var additions = 0
-    var deletions = 0
-    var changes = 0
+    var patch = ""
     var lines = [Line]()
 }
 
 extension File {
     
-    init?(json: [String: Any]) {
-        guard let filename = json["filename"] as? String,
-            let status = json["status"] as? String,
-            let additions = json["additions"] as? Int,
-            let deletions = json["deletions"] as? Int,
-            let changes = json["changes"] as? Int,
-            let patch = json["patch"] as? String
-            else {
-                return nil
+    init(json: JSONDictionary) throws {
+        guard let filename = json["filename"] as? String else {
+            throw SerializationError.missing("filename")
+        }
+        guard let patch = json["patch"] as? String else {
+            throw SerializationError.missing("patch")
         }
         
         self.filename = filename
-        self.status = status
-        self.additions = additions
-        self.deletions = deletions
-        self.changes = changes
+        self.patch = patch
         self.lines = tempLines() //patch
     }
     
@@ -45,5 +36,15 @@ extension File {
         let added = Line(content: "+this showed up"
             , lineNumbers: (2,2))!
         return [unchanged, deleted, added]
+    }
+}
+
+extension File {
+    static func all(pullNumber: Int) -> Resource<[File]> {
+        let all = Resource<[File]>(url: URL(string: "https://api.github.com/repos/magicalpanda/MagicalRecord/pulls/\(pullNumber)/files")!, parseJSON: { json in
+            guard let dictionaries = json as? [JSONDictionary] else { throw SerializationError.missing("files") }
+            return try dictionaries.map(File.init)
+        })
+        return all
     }
 }

@@ -32,23 +32,22 @@ class DetailViewController: UIViewController {
     private func configureView() {
         if let pull = pullRequest {
             title = pull.title
-
             fetchFiles()
         }
     }
     
     func fetchFiles() {
-        let dict: [String: Any] = [
-            "filename": "filename",
-            "status": "status",
-            "additions": 2,
-            "deletions": 3,
-            "changes": 4,
-            "patch": "these are a bunch of changes"
-        ]
-        
-        if let file = File(json: dict) {
-            files = [file, file, file]
+        guard let pull = pullRequest else {
+            return
+        }
+        Service().load(resource: File.all(pullNumber: pull.number)) { result in
+            switch result {
+            case .success(let files):
+                self.files = files
+                self.tableView.reloadData()
+            case .failure(let error):
+                print(error)
+            }
         }
     }
 }

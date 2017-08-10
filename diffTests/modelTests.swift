@@ -22,37 +22,48 @@ class modelTests: XCTestCase {
     }
     
     func testInitPullFromJSON() {
-        let pull = PullRequest(json: pullRequestDict())
         
-        XCTAssertEqual(pull?.number, 123)
-        XCTAssertEqual(pull?.title, "test pull")
-        XCTAssertEqual(pull?.body, "test body")
-        XCTAssertEqual(pull?.diffUrl, "http://")
-        XCTAssertEqual(pull?.createdAt, "2017-05-20T10:07:40Z")
-        XCTAssertEqual(pull?.author, "Ryan")
+        let pull = try! PullRequest(json: pullRequestDict())
+        
+        XCTAssertEqual(pull.number, 123)
+        XCTAssertEqual(pull.title, "test pull")
+        XCTAssertEqual(pull.body, "test body")
+        XCTAssertEqual(pull.diffUrl, "http://")
+        XCTAssertEqual(pull.createdAt, "2017-05-20T10:07:40Z")
+        XCTAssertEqual(pull.author, "Ryan")
         
         var badDict = pullRequestDict()
         badDict["user"] = nil
         
-        let badPull = PullRequest(json: badDict)
-        XCTAssertNil(badPull)
+        do {
+            _ = try PullRequest(json: badDict)
+        }
+        catch let e as SerializationError {
+            XCTAssertEqual(e, SerializationError.missing("user"))
+        }
+        catch {
+            XCTFail("Wrong error")
+        }
     }
     
     func testInitFileFromJSON() {
-        let file = File(json: fileDict())
+        let file = try! File(json: fileDict())
         
-        XCTAssertEqual(file?.filename, "filename")
-        XCTAssertEqual(file?.status, "status")
-        XCTAssertEqual(file?.additions, 2)
-        XCTAssertEqual(file?.deletions, 3)
-        XCTAssertEqual(file?.changes, 4)
-        XCTAssertEqual(file?.patch, "these are a bunch of changes")
+        XCTAssertEqual(file.filename, "filename")
+        XCTAssertEqual(file.patch, " these are a bunch of changes")
         
         var badDict = fileDict()
-        badDict["filename"] = nil
+        badDict["patch"] = nil
         
-        let badFile = PullRequest(json: badDict)
-        XCTAssertNil(badFile)
+        do {
+            _ = try File(json: badDict)
+        }
+        catch let err as SerializationError {
+            XCTAssertEqual(err, SerializationError.missing("patch"))
+        }
+        catch {
+            XCTFail("Wrong error")
+        }
     }
     
     func testInitLines() {
@@ -82,15 +93,11 @@ class modelTests: XCTestCase {
     func fileDict() -> [String: Any] {
         return [
             "filename": "filename",
-            "status": "status",
-            "additions": 2,
-            "deletions": 3,
-            "changes": 4,
-            "patch": "these are a bunch of changes"
+            "patch": " these are a bunch of changes"
         ]
     }
     
-    func pullRequestDict() -> [String: Any] {
+    func pullRequestDict() -> JSONDictionary {
         return [
             "number": 123,
             "title": "test pull",

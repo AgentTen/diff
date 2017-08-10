@@ -33,23 +33,16 @@ class MasterViewController: UITableViewController {
         fetchPulls()
     }
     
-    // temp
     func fetchPulls() {
-        let dict: [String: Any] = [
-            "number": 123,
-            "title": "test pull",
-            "body": "test body",
-            "diff_url": "http://",
-            "created_at": "2017-05-20T10:07:40Z",
-            "user": [
-                "login": "Ryan"
-            ]
-        ]
-        
-        if let pull = PullRequest(json: dict) {
-            pullRequests = [pull, pull, pull]
+        Service().load(resource: PullRequest.all) { result in
+            switch result {
+            case .success(let pullRequests):
+                self.pullRequests = pullRequests
+                self.tableView.reloadData()
+            case .failure(let error):
+                print(error)
+            }
         }
-        tableView.reloadData()
     }
     
     // MARK: - Segues
