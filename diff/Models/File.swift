@@ -15,7 +15,7 @@ struct File {
     var additions = 0
     var deletions = 0
     var changes = 0
-    var patch = ""
+    var lines = [Line]()
 }
 
 extension File {
@@ -36,6 +36,14 @@ extension File {
         self.additions = additions
         self.deletions = deletions
         self.changes = changes
-        self.patch = patch
+        self.lines = tempLines() //patch
+    }
+    
+    func tempLines() -> [Line] {
+        let unchanged = Line(content: " nothing changes", lineNumbers: (1,1))!
+        let deleted = Line(content: "-this went away", lineNumbers: (2,2))!
+        let added = Line(content: "+this showed up"
+            , lineNumbers: (2,2))!
+        return [unchanged, deleted, added]
     }
 }

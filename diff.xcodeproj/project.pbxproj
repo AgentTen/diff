@@ -19,6 +19,9 @@
 		DF36C4F51F3C08760003E793 /* PullRequestTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF36C4F41F3C08760003E793 /* PullRequestTableViewCell.swift */; };
 		DF36C4F71F3C0CC00003E793 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF36C4F61F3C0CC00003E793 /* File.swift */; };
 		DF36C4F91F3C0E7B0003E793 /* SectionHeaderViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF36C4F81F3C0E7B0003E793 /* SectionHeaderViewCell.swift */; };
+		DF492CC61F3C163D005E6AAB /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF492CC51F3C163D005E6AAB /* Line.swift */; };
+		DF492CC81F3C19E4005E6AAB /* LineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF492CC71F3C19E4005E6AAB /* LineTableViewCell.swift */; };
+		DF492CCB1F3C1B3D005E6AAB /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF492CCA1F3C1B3D005E6AAB /* Colors.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +50,9 @@
 		DF36C4F41F3C08760003E793 /* PullRequestTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PullRequestTableViewCell.swift; path = Views/PullRequestTableViewCell.swift; sourceTree = "<group>"; };
 		DF36C4F61F3C0CC00003E793 /* File.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = File.swift; path = Models/File.swift; sourceTree = "<group>"; };
 		DF36C4F81F3C0E7B0003E793 /* SectionHeaderViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SectionHeaderViewCell.swift; path = Views/SectionHeaderViewCell.swift; sourceTree = "<group>"; };
+		DF492CC51F3C163D005E6AAB /* Line.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Line.swift; path = Models/Line.swift; sourceTree = "<group>"; };
+		DF492CC71F3C19E4005E6AAB /* LineTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LineTableViewCell.swift; path = Views/LineTableViewCell.swift; sourceTree = "<group>"; };
+		DF492CCA1F3C1B3D005E6AAB /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Colors.swift; path = Utils/Colors.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,11 +94,12 @@
 		DF36C4C31F3BF5B20003E793 /* diff */ = {
 			isa = PBXGroup;
 			children = (
+				DF36C4E61F3C03380003E793 /* Models */,
 				DF36C4F31F3C085E0003E793 /* Views */,
 				DF36C4EE1F3C078E0003E793 /* Controllers */,
-				DF36C4E61F3C03380003E793 /* Models */,
 				DF36C4C41F3BF5B20003E793 /* AppDelegate.swift */,
 				DF36C4CA1F3BF5B20003E793 /* Main.storyboard */,
+				DF492CC91F3C1B22005E6AAB /* Utils */,
 				DF36C4CD1F3BF5B20003E793 /* Assets.xcassets */,
 				DF36C4CF1F3BF5B20003E793 /* LaunchScreen.storyboard */,
 				DF36C4D21F3BF5B20003E793 /* Info.plist */,
@@ -114,6 +121,7 @@
 			children = (
 				DF36C4E71F3C03560003E793 /* PullRequest.swift */,
 				DF36C4F61F3C0CC00003E793 /* File.swift */,
+				DF492CC51F3C163D005E6AAB /* Line.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -132,8 +140,17 @@
 			children = (
 				DF36C4F41F3C08760003E793 /* PullRequestTableViewCell.swift */,
 				DF36C4F81F3C0E7B0003E793 /* SectionHeaderViewCell.swift */,
+				DF492CC71F3C19E4005E6AAB /* LineTableViewCell.swift */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		DF492CC91F3C1B22005E6AAB /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				DF492CCA1F3C1B3D005E6AAB /* Colors.swift */,
+			);
+			name = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -241,11 +258,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DF492CC81F3C19E4005E6AAB /* LineTableViewCell.swift in Sources */,
+				DF492CCB1F3C1B3D005E6AAB /* Colors.swift in Sources */,
 				DF36C4F21F3C07A70003E793 /* MasterViewController.swift in Sources */,
 				DF36C4F71F3C0CC00003E793 /* File.swift in Sources */,
 				DF36C4F91F3C0E7B0003E793 /* SectionHeaderViewCell.swift in Sources */,
 				DF36C4F51F3C08760003E793 /* PullRequestTableViewCell.swift in Sources */,
 				DF36C4F11F3C07A70003E793 /* DetailViewController.swift in Sources */,
+				DF492CC61F3C163D005E6AAB /* Line.swift in Sources */,
 				DF36C4E81F3C03560003E793 /* PullRequest.swift in Sources */,
 				DF36C4C51F3BF5B20003E793 /* AppDelegate.swift in Sources */,
 			);
@@ -460,6 +480,7 @@
 				DF36C4E21F3BF5B20003E793 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		DF36C4E31F3BF5B20003E793 /* Build configuration list for PBXNativeTarget "diffTests" */ = {
 			isa = XCConfigurationList;
@@ -468,6 +489,7 @@
 				DF36C4E51F3BF5B20003E793 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

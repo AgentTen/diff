@@ -55,6 +55,30 @@ class modelTests: XCTestCase {
         XCTAssertNil(badFile)
     }
     
+    func testInitLines() {
+        let unchanged = Line(content: " nothing changes", lineNumbers: (1,1))
+        
+        XCTAssertEqual(unchanged?.lineType, .unchanged)
+        XCTAssertEqual(unchanged?.lineNumbers.deleted, 1)
+        XCTAssertEqual(unchanged?.lineNumbers.added, 1)
+        
+        let deleted = Line(content: "-this went away", lineNumbers: (1,2))
+
+        XCTAssertEqual(deleted?.lineType, .deletion)
+        XCTAssertEqual(deleted?.lineNumbers.deleted, 1)
+        XCTAssertEqual(deleted?.lineNumbers.added, 2)
+
+        let added = Line(content: "+this showed up"
+            , lineNumbers: (2,1))
+
+        XCTAssertEqual(added?.lineType, .addition)
+        XCTAssertEqual(added?.lineNumbers.deleted, 2)
+        XCTAssertEqual(added?.lineNumbers.added, 1)
+
+        let badLine = Line(content: "***", lineNumbers: (0,0))
+        XCTAssertNil(badLine)
+    }
+    
     func fileDict() -> [String: Any] {
         return [
             "filename": "filename",

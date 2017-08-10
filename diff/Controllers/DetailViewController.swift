@@ -61,12 +61,15 @@ extension DetailViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let file = files[section]
-        return file.additions + file.deletions
+        return file.lines.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        cell.textLabel!.text = "Changesss"
+        let cell = tableView.dequeueReusableCell(withIdentifier: "LineCell", for: indexPath) as! LineTableViewCell
+        
+        let file = files[indexPath.section]
+        let line = file.lines[indexPath.row]
+        cell.configureCell(line: line)
         return cell
     }
 }
