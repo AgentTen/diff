@@ -22,16 +22,25 @@ class LineTableViewCell: UITableViewCell {
     @IBOutlet weak var leftLineLabel: UILabel!
     @IBOutlet weak var rightLineLabel: UILabel!
     
-    func configureCell(line: Line) {
+    func configureCell(line: Line, fontSize: CGFloat) {
         leftLineNumberLabel.text = "\(line.lineNumbers.deleted)"
         rightLineNumberLabel.text = "\(line.lineNumbers.added)"
         
         leftLineLabel.text = line.content
         rightLineLabel.text = line.content
         
+        setFontSize(fontSize: fontSize)
         setColorsForType(lineType: line.lineType)
     }
-
+    
+    private func setFontSize(fontSize: CGFloat) {
+        leftLineNumberLabel.font = leftLineNumberLabel.font.withSize(fontSize)
+        rightLineNumberLabel.font = rightLineNumberLabel.font.withSize(fontSize)
+        
+        leftLineLabel.font = leftLineLabel.font.withSize(fontSize)
+        rightLineLabel.font = rightLineLabel.font.withSize(fontSize)
+    }
+    
     private func setColorsForType(lineType: LineType) {
         switch lineType {
         case .unchanged:

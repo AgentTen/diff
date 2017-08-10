@@ -8,4 +8,3 @@
 * Please use native iOS (Objective-C or Swift), not web views, javascript, etc.
 
 (hard-coded to point to the MagicalRecord https://github.com/magicalpanda/MagicalRecord repo)
-# diff

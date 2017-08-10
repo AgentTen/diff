@@ -27,6 +27,8 @@
 		DF492CD01F3C3194005E6AAB /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF492CCE1F3C2E05005E6AAB /* Resource.swift */; };
 		DF492CD11F3C3779005E6AAB /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF36C4F61F3C0CC00003E793 /* File.swift */; };
 		DF492CD21F3C378A005E6AAB /* Line.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF492CC51F3C163D005E6AAB /* Line.swift */; };
+		DF492CD61F3CC79A005E6AAB /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF492CD51F3CC79A005E6AAB /* Defaults.swift */; };
+		DF492CD81F3CC82D005E6AAB /* PopoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF492CD71F3CC82D005E6AAB /* PopoverViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +62,8 @@
 		DF492CCA1F3C1B3D005E6AAB /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Colors.swift; path = Utils/Colors.swift; sourceTree = "<group>"; };
 		DF492CCC1F3C2397005E6AAB /* Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Service.swift; path = Utils/Service.swift; sourceTree = "<group>"; };
 		DF492CCE1F3C2E05005E6AAB /* Resource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Resource.swift; path = Models/Resource.swift; sourceTree = "<group>"; };
+		DF492CD51F3CC79A005E6AAB /* Defaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Defaults.swift; path = Utils/Defaults.swift; sourceTree = "<group>"; };
+		DF492CD71F3CC82D005E6AAB /* PopoverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PopoverViewController.swift; path = Controllers/PopoverViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +143,7 @@
 			children = (
 				DF36C4EF1F3C07A70003E793 /* DetailViewController.swift */,
 				DF36C4F01F3C07A70003E793 /* MasterViewController.swift */,
+				DF492CD71F3CC82D005E6AAB /* PopoverViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -158,6 +163,7 @@
 			children = (
 				DF492CCA1F3C1B3D005E6AAB /* Colors.swift */,
 				DF492CCC1F3C2397005E6AAB /* Service.swift */,
+				DF492CD51F3CC79A005E6AAB /* Defaults.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -268,6 +274,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				DF492CC81F3C19E4005E6AAB /* LineTableViewCell.swift in Sources */,
+				DF492CD61F3CC79A005E6AAB /* Defaults.swift in Sources */,
+				DF492CD81F3CC82D005E6AAB /* PopoverViewController.swift in Sources */,
 				DF492CCB1F3C1B3D005E6AAB /* Colors.swift in Sources */,
 				DF36C4F21F3C07A70003E793 /* MasterViewController.swift in Sources */,
 				DF36C4F71F3C0CC00003E793 /* File.swift in Sources */,

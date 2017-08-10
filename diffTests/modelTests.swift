@@ -63,7 +63,6 @@ class modelTests: XCTestCase {
         let file = try! File(json: fileDict())
         
         XCTAssertEqual(file.filename, "filename")
-        XCTAssertEqual(file.patch, " these are a bunch of changes")
         
         var badDict = fileDict()
         badDict["patch"] = nil
@@ -79,10 +78,20 @@ class modelTests: XCTestCase {
         }
     }
     
+    func testRenamedFile() {
+        var renamed = fileDict()
+        renamed["status"] = "renamed"
+        
+        let file = try! File(json: renamed)
+        
+        XCTAssertEqual(file.filename, "filename (renamed)")
+    }
+    
     func fileDict() -> [String: Any] {
         return [
             "filename": "filename",
-            "patch": " these are a bunch of changes"
+            "patch": " these are a bunch of changes",
+            "status": "modified"
         ]
     }
     

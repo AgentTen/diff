@@ -11,7 +11,6 @@ import Foundation
 struct File {
     
     var filename = ""
-    var patch = ""
     var lines = [Line]()
 }
 
@@ -21,12 +20,19 @@ extension File {
         guard let filename = json["filename"] as? String else {
             throw SerializationError.missing("filename")
         }
+        self.filename = filename
+
+        guard let status = json["status"] as? String else {
+            throw SerializationError.missing("status")
+        }
+        if status == "renamed" {
+            self.filename += " (renamed)"
+            return
+        }
+        
         guard let patch = json["patch"] as? String else {
             throw SerializationError.missing("patch")
         }
-        
-        self.filename = filename
-        self.patch = patch
         self.lines = Line.parsePatch(patch: patch)
     }
 }

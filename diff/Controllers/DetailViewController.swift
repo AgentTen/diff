@@ -12,7 +12,10 @@ class DetailViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     var files = [File]()
-    
+    var fontSize: CGFloat {
+        get { return Defaults.fontSize }
+        set { Defaults.fontSize = newValue }
+    }
     var pullRequest: PullRequest? {
         didSet {
             configureView()
@@ -77,7 +80,7 @@ extension DetailViewController: UITableViewDataSource {
         
         let file = files[indexPath.section]
         let line = file.lines[indexPath.row]
-        cell.configureCell(line: line)
+        cell.configureCell(line: line, fontSize: fontSize)
         return cell
     }
 }
@@ -87,5 +90,41 @@ extension DetailViewController: UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HeaderCell") as! SectionHeaderViewCell
         cell.headerLabel.text = files[section].filename
         return cell
+    }
+}
+
+extension DetailViewController: UIPopoverPresentationControllerDelegate {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "popoverSegue" {
+            let vc = segue.destination as! PopoverViewController
+            vc.preferredContentSize = CGSize(width: 100, height: 50)
+            vc.modalPresentationStyle = .popover
+            vc.popoverPresentationController?.delegate = self
+            vc.delegate = self
+        }
+    }
+    
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
+    }
+    
+    func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
+        return .none
+    }
+}
+
+extension DetailViewController: PopoverViewControllerDelegate {
+    func smallerButtonTapped() {
+        if fontSize > 6 {
+            fontSize -= 1
+            tableView.reloadData()
+        }
+    }
+    
+    func largerButtonTapped() {
+        if fontSize < 19 {
+            fontSize += 1
+            tableView.reloadData()
+        }
     }
 }

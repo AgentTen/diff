@@ -99,14 +99,14 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ssU-If-Gmh">
-                                                    <rect key="frame" x="0.0" y="0.0" width="187.5" height="44"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="187.5" height="20"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YtS-en-34l">
-                                                            <rect key="frame" x="172" y="-0.5" width="15" height="44"/>
+                                                            <rect key="frame" x="172" y="-0.5" width="15" height="20.5"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cPV-Gy-et9">
-                                                            <rect key="frame" x="8" y="3.5" width="160" height="38"/>
+                                                            <rect key="frame" x="8" y="3.5" width="160" height="13.5"/>
                                                             <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="12"/>
                                                             <color key="textColor" red="0.14117647059999999" green="0.16078431369999999" blue="0.18039215689999999" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -133,10 +133,10 @@
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EME-hW-jm8">
-                                                    <rect key="frame" x="187.5" y="0.0" width="187.5" height="44"/>
+                                                    <rect key="frame" x="187.5" y="0.0" width="187.5" height="20"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mRA-gz-FWq">
-                                                            <rect key="frame" x="0.0" y="-0.5" width="15.5" height="44"/>
+                                                            <rect key="frame" x="0.0" y="-0.5" width="15.5" height="20"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ef2-bu-9Rt">
@@ -146,7 +146,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cR4-eo-XmW">
-                                                            <rect key="frame" x="19.5" y="3.5" width="160.5" height="38"/>
+                                                            <rect key="frame" x="19.5" y="3.5" width="160.5" height="14"/>
                                                             <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="12"/>
                                                             <color key="textColor" red="0.14117647059999999" green="0.16078431369999999" blue="0.18039215689999999" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -167,7 +167,7 @@
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fnJ-DQ-kPJ" userLabel="Border">
-                                                    <rect key="frame" x="186.5" y="-0.5" width="1" height="44.5"/>
+                                                    <rect key="frame" x="186.5" y="-0.5" width="1" height="20.5"/>
                                                     <color key="backgroundColor" red="0.1058823529" green="0.1215686275" blue="0.13725490200000001" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="1" id="j1i-Fz-kKj"/>
@@ -212,7 +212,15 @@
                         </constraints>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" title="Detail" id="mOI-FS-AaM"/>
+                    <navigationItem key="navigationItem" title="Detail" id="mOI-FS-AaM">
+                        <barButtonItem key="rightBarButtonItem" title="aA" id="Qdb-XJ-9FP">
+                            <connections>
+                                <segue destination="eF3-eL-PST" kind="popoverPresentation" identifier="popoverSegue" popoverAnchorBarButtonItem="Qdb-XJ-9FP" id="Yt0-X7-q5J">
+                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                </segue>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="6hI-lo-igV" id="pwn-s1-KSf"/>
                     </connections>
@@ -300,6 +308,59 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SLD-UC-DBI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-45" y="129"/>
+        </scene>
+        <!--Popover View Controller-->
+        <scene sceneID="MRQ-BF-UB7">
+            <objects>
+                <viewController id="eF3-eL-PST" customClass="PopoverViewController" customModule="diff" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="zFW-0Y-Nb8"/>
+                        <viewControllerLayoutGuide type="bottom" id="NMv-3I-3lO"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="iMW-JX-kvr">
+                        <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hfR-QI-U6j">
+                                <rect key="frame" x="22.5" y="60" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="IHI-KW-yqO"/>
+                                    <constraint firstAttribute="height" constant="30" id="YaU-rK-vuS"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <state key="normal" title="A"/>
+                                <connections>
+                                    <action selector="smallerButtonTapped:" destination="eF3-eL-PST" eventType="touchUpInside" id="vnf-VS-sRF"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Plf-T6-yZe">
+                                <rect key="frame" x="97.5" y="60" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Dqf-ja-0GE"/>
+                                    <constraint firstAttribute="width" constant="30" id="JgZ-3n-p9X"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="A"/>
+                                <connections>
+                                    <action selector="largerButtonTapped:" destination="eF3-eL-PST" eventType="touchUpInside" id="pZ1-sT-NW6"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Plf-T6-yZe" firstAttribute="centerX" secondItem="iMW-JX-kvr" secondAttribute="centerX" multiplier="1.5" id="2kX-mx-aeN"/>
+                            <constraint firstItem="Plf-T6-yZe" firstAttribute="centerY" secondItem="iMW-JX-kvr" secondAttribute="centerY" id="T8V-OB-PFe"/>
+                            <constraint firstItem="hfR-QI-U6j" firstAttribute="centerY" secondItem="iMW-JX-kvr" secondAttribute="centerY" id="T9L-3I-0Y3"/>
+                            <constraint firstItem="hfR-QI-U6j" firstAttribute="centerX" secondItem="iMW-JX-kvr" secondAttribute="centerX" multiplier="0.5" id="h8I-Az-SP5"/>
+                        </constraints>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="150" height="150"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uff-Ke-VXb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1445" y="128"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
