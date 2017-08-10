@@ -46,9 +46,18 @@ class DetailViewController: UIViewController {
                 self.files = files
                 self.tableView.reloadData()
             case .failure(let error):
-                print(error)
+                self.showFetchAlert(message: error.localizedDescription)
             }
         }
+    }
+    
+    func showFetchAlert(message: String) {
+        let alert = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Try Again", style: .default, handler: { _ in
+            self.fetchFiles()
+        }))
+        present(alert, animated: true, completion: nil)
     }
 }
 

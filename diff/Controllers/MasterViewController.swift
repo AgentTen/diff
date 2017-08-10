@@ -29,7 +29,6 @@ class MasterViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         clearsSelectionOnViewWillAppear = splitViewController!.isCollapsed
         super.viewWillAppear(animated)
-        
         fetchPulls()
     }
     
@@ -40,13 +39,23 @@ class MasterViewController: UITableViewController {
                 self.pullRequests = pullRequests
                 self.tableView.reloadData()
             case .failure(let error):
-                print(error)
+                self.showFetchAlert(message: error.localizedDescription)
             }
         }
     }
     
-    // MARK: - Segues
+    func showFetchAlert(message: String) {
+        let alert = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Try Again", style: .default, handler: { _ in
+            self.fetchPulls()
+        }))
+        present(alert, animated: true, completion: nil)
+    }
+}
 
+// MARK: - Segues
+extension MasterViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetail" {
             if let indexPath = tableView.indexPathForSelectedRow {
@@ -58,9 +67,10 @@ class MasterViewController: UITableViewController {
             }
         }
     }
+}
 
-    // MARK: - Table View
-    
+// MARK: - Table View
+extension MasterViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -77,4 +87,3 @@ class MasterViewController: UITableViewController {
         return cell
     }
 }
-

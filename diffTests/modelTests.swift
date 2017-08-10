@@ -46,6 +46,19 @@ class modelTests: XCTestCase {
         }
     }
     
+    func pullRequestDict() -> JSONDictionary {
+        return [
+            "number": 123,
+            "title": "test pull",
+            "body": "test body",
+            "diff_url": "http://",
+            "created_at": "2017-05-20T10:07:40Z",
+            "user": [
+                "login": "Ryan"
+            ]
+        ]
+    }
+    
     func testInitFileFromJSON() {
         let file = try! File(json: fileDict())
         
@@ -64,6 +77,13 @@ class modelTests: XCTestCase {
         catch {
             XCTFail("Wrong error")
         }
+    }
+    
+    func fileDict() -> [String: Any] {
+        return [
+            "filename": "filename",
+            "patch": " these are a bunch of changes"
+        ]
     }
     
     func testInitLines() {
@@ -90,23 +110,29 @@ class modelTests: XCTestCase {
         XCTAssertNil(badLine)
     }
     
-    func fileDict() -> [String: Any] {
-        return [
-            "filename": "filename",
-            "patch": " these are a bunch of changes"
-        ]
+    func testParsePatchIntoLines() {
+        let lines = Line.parsePatch(patch: patch())
+        
+        XCTAssertEqual(lines.count, 10)
+        XCTAssertEqual(lines[0].lineType, .unchanged)
+        XCTAssertEqual(lines[1].content, " ")
+        XCTAssertEqual(lines[2].content, "         } while (!convertedValue && dateFormat);")
+        XCTAssertEqual(lines[3].lineType, .deletion)
+        XCTAssertEqual(lines[4].lineType, .addition)
+        XCTAssertEqual(lines[5].lineType, .addition)
+        XCTAssertEqual(lines[6].lineNumbers.added, 51)
+        XCTAssertEqual(lines[6].lineNumbers.deleted, 50)
+        XCTAssertEqual(lines[7].lineNumbers.added, 52)
+        XCTAssertEqual(lines[7].lineNumbers.deleted, 50)
+        XCTAssertEqual(lines[8].lineNumbers.added, 53)
+        XCTAssertEqual(lines[8].lineNumbers.deleted, 51)
+        XCTAssertEqual(lines[9].content, " }")
+        
+        let noLines = Line.parsePatch(patch: " ")
+        XCTAssertEqual(noLines.count, 0)
     }
     
-    func pullRequestDict() -> JSONDictionary {
-        return [
-            "number": 123,
-            "title": "test pull",
-            "body": "test body",
-            "diff_url": "http://",
-            "created_at": "2017-05-20T10:07:40Z",
-            "user": [
-                "login": "Ryan"
-            ]
-        ]
+    func patch() -> String {
+        return "@@ -46,7 +46,9 @@ - (NSDate *)MR_dateValueForKeyPath:(NSString *)keyPath fromObjectData:(id)object\n             convertedValue = [value MR_dateWithFormat:dateFormat];\n \n         } while (!convertedValue && dateFormat);\n-        value = convertedValue;\n+        if(convertedValue!=nil){\n+            value = convertedValue;\n+        }\n     }\n     return value;\n }"
     }
 }
