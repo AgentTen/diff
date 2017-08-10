@@ -38,6 +38,34 @@ class modelTests: XCTestCase {
         XCTAssertNil(badPull)
     }
     
+    func testInitFileFromJSON() {
+        let file = File(json: fileDict())
+        
+        XCTAssertEqual(file?.filename, "filename")
+        XCTAssertEqual(file?.status, "status")
+        XCTAssertEqual(file?.additions, 2)
+        XCTAssertEqual(file?.deletions, 3)
+        XCTAssertEqual(file?.changes, 4)
+        XCTAssertEqual(file?.patch, "these are a bunch of changes")
+        
+        var badDict = fileDict()
+        badDict["filename"] = nil
+        
+        let badFile = PullRequest(json: badDict)
+        XCTAssertNil(badFile)
+    }
+    
+    func fileDict() -> [String: Any] {
+        return [
+            "filename": "filename",
+            "status": "status",
+            "additions": 2,
+            "deletions": 3,
+            "changes": 4,
+            "patch": "these are a bunch of changes"
+        ]
+    }
+    
     func pullRequestDict() -> [String: Any] {
         return [
             "number": 123,

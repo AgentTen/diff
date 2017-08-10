@@ -9,20 +9,72 @@
 import UIKit
 
 class DetailViewController: UIViewController {
-
+    
+    @IBOutlet weak var tableView: UITableView!
+    var files = [File]()
+    
     var pullRequest: PullRequest? {
         didSet {
             configureView()
         }
     }
     
-    func configureView() {
-        if let pull = pullRequest {
-            title = pull.title
-        }
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.sectionHeaderHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 20
+        tableView.estimatedSectionHeaderHeight = 34
+    }
+    
+    private func configureView() {
+        if let pull = pullRequest {
+            title = pull.title
+
+            fetchFiles()
+        }
+    }
+    
+    func fetchFiles() {
+        let dict: [String: Any] = [
+            "filename": "filename",
+            "status": "status",
+            "additions": 2,
+            "deletions": 3,
+            "changes": 4,
+            "patch": "these are a bunch of changes"
+        ]
+        
+        if let file = File(json: dict) {
+            files = [file, file, file]
+        }
+    }
+}
+
+extension DetailViewController: UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return files.count
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        let file = files[section]
+        return file.additions + file.deletions
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        cell.textLabel!.text = "Changesss"
+        return cell
+    }
+}
+
+extension DetailViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "HeaderCell") as! SectionHeaderViewCell
+        cell.headerLabel.text = files[section].filename
+        return cell
     }
 }
